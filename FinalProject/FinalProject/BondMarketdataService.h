@@ -22,10 +22,16 @@ public:
 	// for data to the Service.
 	virtual void AddListener(ServiceListener<OrderBook<Bond>> *) override;
 
+	const OrderBook<Bond>& AggregateDepth(const string &productId) override;
+
 	// Get all listeners on the Service.
 	virtual const vector< ServiceListener<OrderBook<Bond>>* >& GetListeners() const ;
 };
 
+const OrderBook<Bond>& BondMarketdataService::AggregateDepth(const string &productId) {
+	return OrderBooks_Map[productId];
+
+}
 
 const BidOffer BondMarketdataService::GetBestBidOffer(const string &cusip) {
 	Order best_bid = (OrderBooks_Map[cusip].GetBidStack()).at(0);

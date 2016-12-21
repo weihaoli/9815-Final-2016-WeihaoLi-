@@ -79,8 +79,10 @@ int main() {
 	
 	
 	//Create a History connector and lINKED it to HistorydataService
-	HistoricalData_Connector<Position<Bond>> HistoricalPosition_Connector("Position_Hist.txt");
-	HistoricalDataService<Position<Bond>> HistoricalPosition(HistoricalPosition_Connector);
+	//We just test Risk Here for Inquiries Service here for orther Service just change the
+	//templatet type To PV01<Bond>,Position<Bond>,etc
+	HistoricalData_Connector<Inquiry<Bond>> HistoricalSevice_Connector("Out_File_History.txt");
+	HistoricalDataService<Inquiry<Bond>> HistoricalService(HistoricalSevice_Connector);
 	
 
 
@@ -117,8 +119,8 @@ int main() {
 	_AlgoExecutionService.AddListener(&Listener_Al2Ex);
 
 	//Listener: Position and Historydata
-	HistoricalData_Listener<Position<Bond>> HistoricalPosition_Listener(HistoricalPosition);
-	PositionService.AddListener(&HistoricalPosition_Listener);
+	HistoricalData_Listener<Inquiry<Bond>> HistoricalService_Listener(HistoricalService);
+	_InquiryService.AddListener(&HistoricalService_Listener);
 
 
 	/**********************************************************************************/
@@ -215,7 +217,7 @@ int main() {
 	std::cout << "\n**************************\n";
 
 	
-	OrderBook<Bond> order_book_2Y = MarketdataService.GetData("912828M72");
+	OrderBook<Bond> order_book_2Y = MarketdataService.AggregateDepth("912828M72");
 	cout << "The latest orderbook of 912828M72\n";
 	cout << "\n  Best bid price  : " << order_book_2Y.GetBidStack()[0].GetPrice();
 	cout << "\n   with quantity  : " << order_book_2Y.GetBidStack()[0].GetQuantity();
@@ -231,7 +233,7 @@ int main() {
 	std::cout<<"Test the #8 Receive Bond Inquiry :"<<_InquiryService.GetData(Iquiry_id);
 
 
-	//test the Inquiry Service
+	
 	std::cout << "\n\n\n\n*********************************************************\n";
 	std::cout << "\n    To Check Execution/Streaming/History Service See correponding 'Out_File XXX.txt. ";
 	std::cout << "\n****************************************************************\n";

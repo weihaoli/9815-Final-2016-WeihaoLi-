@@ -115,7 +115,7 @@ public:
 	virtual const BidOffer GetBestBidOffer(const string &productId) = 0;
 
 	// Aggregate the order book, this should be the same as get data
-	//virtual const OrderBook<T>& AggregateDepth(const string &productId) = 0;
+	virtual const OrderBook<T>& AggregateDepth(const string &productId) = 0;
 
 };
 
