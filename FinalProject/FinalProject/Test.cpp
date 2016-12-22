@@ -8,7 +8,7 @@
 #include"executionservice.hpp"
 #include"BondStreamingService.h"
 #include"BondExecutionService.h"
-#include"BondInquiryservice.h"
+#include"BondInquiryService.h"
 #include"historicaldataservice.hpp"
 int main() {
 
